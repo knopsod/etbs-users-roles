@@ -1,0 +1,10 @@
+extend ../layout
+
+block content
+  h1 Roles Page
+  p Welcome to Roles Page
+  a(href='./etbs-roles/form') Form
+  ul
+    each role in roles
+      li=role.rolename
+  

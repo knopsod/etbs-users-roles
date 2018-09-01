@@ -1,0 +1,14 @@
+extend ../layout
+
+block content
+  h1 Roles Page
+  p Welcome to Roles Page
+  form(method='POST' action='/etbs-roles/insert')
+    div.form-group
+      label(for='rolename') Role Name:
+      input#rolename.form-control(type='text', placeholder='Role Name' name='rolename')
+    div.form-group
+      label(for='profileid') Profile ID:
+      input#profileid.form-control(type='text', placeholder='Profile ID' name='profileid')
+    button.btn.btn-primary(type='submit') Submit
+  

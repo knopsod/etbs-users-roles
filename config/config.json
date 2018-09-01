@@ -1,8 +1,8 @@
 {
     "dbserver": {
         "host": "localhost",
-        "user": "etbsuser",
-        "password": "etbsDB@Admin_1",
+        "user": "root",
+        "password": "",
         "database": "etbsjs"
     },
     "redisserver": {

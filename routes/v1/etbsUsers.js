@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET etbs-users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond etbs-users');
+  res.render('v1/etbsUsers');
+});
+
+router.get('/form', function(req, res, next) {
+  res.render('v1/etbsUsersForm');
 });
 
 router.post('/insert', function(req, res, next) {
