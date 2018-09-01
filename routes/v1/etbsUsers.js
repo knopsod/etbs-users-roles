@@ -14,23 +14,31 @@ router.post('/insert', function(req, res, next) {
   res.send('respond etbs-users');
 });
 
+router.get('/:id', function(req, res, next) {
+  res.render('v1/etbsUsersForm');
+});
+
 router.post('/update', function(req, res, next) {
   res.send('respond etbs-users');
+});
+
+router.get('/:id/remove', function(req, res, next) {
+  res.render('v1/etbsUsersForm');
 });
 
 router.post('/delete', function(req, res, next) {
   res.send('respond etbs-users');
 });
 
-router.get('/users-groups', function(req, res, next) {
+router.get('/:id/users-groups', function(req, res, next) {
   res.send('respond etbs-users');
 });
 
-router.post('/users-groups/insert', function(req, res, next) {
+router.post('/:id/users-groups/:username/:group_id/insert', function(req, res, next) {
   res.send('respond etbs-users');
 });
 
-router.post('/users-groups/delete', function(req, res, next) {
+router.post('/:id/users-groups/:username/:group_id/delete', function(req, res, next) {
   res.send('respond etbs-users');
 });
 

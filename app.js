@@ -6,9 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var etbsUsersRouter = require('./routes/v1/etbsUsers');
 var etbsRolesRouter = require('./routes/v1/etbsRoles');
 var etbsPermissionsRouter = require('./routes/v1/etbsPermissions');
+var etbsUsersRouter = require('./routes/v1/etbsUsers');
 
 var app = express();
 
@@ -26,9 +26,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // etbs v1
-app.use('/etbs-users', etbsUsersRouter);
 app.use('/etbs-roles', etbsRolesRouter);
 app.use('/etbs-permissions', etbsPermissionsRouter);
+app.use('/etbs-users', etbsUsersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

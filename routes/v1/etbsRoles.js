@@ -45,23 +45,31 @@ router.post('/insert', function(req, res, next) {
   }
 });
 
+router.get('/:id', function(req, res, next) {
+  res.render('v1/etbsRolesForm');
+});
+
 router.post('/update', function(req, res, next) {
   res.send('respond etbs-roles');
+});
+
+router.get('/:id/remove', function(req, res, next) {
+  res.render('v1/etbsRolesForm');
 });
 
 router.post('/delete', function(req, res, next) {
   res.send('respond etbs-roles');
 });
 
-router.get('/users', function(req, res, next) {
+router.get('/:id/users', function(req, res, next) {
   res.send('respond etbs-roles');
 });
 
-router.post('/users/insert', function(req, res, next) {
+router.post('/:id/users/:username/insert', function(req, res, next) {
   res.send('respond etbs-roles');
 });
 
-router.post('/users/delete', function(req, res, next) {
+router.post('/:id/users/:username/delete', function(req, res, next) {
   res.send('respond etbs-roles');
 });
 
