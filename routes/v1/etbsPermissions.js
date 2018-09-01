@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
     conn.query(sql,
     function (err, result) {
       res.render('v1/etbsPermissions', { permissions: result });
-
       conn.end();
     });
   }
@@ -36,11 +35,10 @@ router.post('/insert', function(req, res, next) {
 
     conn.query(sql,
     function (err, result) {
-
+      res.redirect('/etbs-permissions');
       conn.end();
     });
 
-    res.redirect('/etbs-permissions');
   }
 });
 

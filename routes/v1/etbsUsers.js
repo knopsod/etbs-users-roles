@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
     conn.query(sql,
     function (err, result) {
       res.render('v1/etbsUsers', { users: result });
-
       conn.end();
     });
   }
@@ -35,11 +34,10 @@ router.post('/insert', function(req, res, next) {
 
     conn.query(sql,
     function (err, result) {
-
+      res.redirect('/etbs-users');
       conn.end();
     });
 
-    res.redirect('/etbs-users');
   }
 });
 

@@ -20,7 +20,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/form', function(req, res, next) {
-  res.render('v1/etbsRolesForm');
+  res.render('v1/etbsRolesForm', {
+    action: '/etbs-roles/insert'
+  });
 });
 
 router.post('/insert', function(req, res, next) {
@@ -36,28 +38,77 @@ router.post('/insert', function(req, res, next) {
 
     conn.query(sql,
     function (err, result) {
-
+      res.redirect('/etbs-roles');
       conn.end();
     });
-
-    res.redirect('/etbs-roles');
   }
 });
 
-router.get('/:id', function(req, res, next) {
-  res.render('v1/etbsRolesForm');
+router.get('/:rolename/:profileid', function(req, res, next) {
+  var rolename = req.params.rolename;
+  var profileid = req.params.profileid;
+  res.render('v1/etbsRolesForm', {
+    action: '/etbs-roles/update',
+    rolename: rolename,
+    profileid: profileid
+  });
 });
 
 router.post('/update', function(req, res, next) {
-  res.send('respond etbs-roles');
+  var originRolename = req.body.originRolename;
+  var originProfileid = req.body.originProfileid;
+  var rolename = req.body.rolename;
+  var profileid = req.body.profileid;
+
+  var conn = database.getConnection();
+
+  if (conn) {
+
+    var sql = "UPDATE roles "
+      + "SET rolename = '" + rolename + "', profileid = '" + profileid + "' "
+      + "WHERE rolename = '" + originRolename + "' AND profileid = '" + originProfileid + "' ";
+
+    conn.query(sql,
+    function (err, result) {
+
+      res.redirect('/etbs-roles');
+      conn.end();
+    });
+
+  }
 });
 
-router.get('/:id/remove', function(req, res, next) {
-  res.render('v1/etbsRolesForm');
+router.get('/:rolename/:profileid/:remove', function(req, res, next) {
+  var rolename = req.params.rolename;
+  var profileid = req.params.profileid;
+  var remove = req.params.remove;
+  res.render('v1/etbsRolesForm', {
+    action: '/etbs-roles/delete',
+    rolename: rolename,
+    profileid: profileid,
+    remove: remove
+  });
 });
 
 router.post('/delete', function(req, res, next) {
-  res.send('respond etbs-roles');
+  var originRolename = req.body.originRolename;
+  var originProfileid = req.body.originProfileid;
+
+  var conn = database.getConnection();
+
+  if (conn) {
+
+    var sql = "DELETE FROM roles "
+      + "WHERE rolename = '" + originRolename + "' AND profileid = '" + originProfileid + "' ";
+
+    conn.query(sql,
+    function (err, result) {
+
+      res.redirect('/etbs-roles');
+      conn.end();
+    });
+
+  }
 });
 
 router.get('/:id/users', function(req, res, next) {
