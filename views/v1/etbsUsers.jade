@@ -3,4 +3,9 @@ extend ../layout
 block content
   h1= Users
   p Welcome to Users page
+  a(href='./etbs-users/form') Form
+  ul
+    each user in users
+      li='username: ' + user.username + ', rolename: ' + user.rolename
+  
   

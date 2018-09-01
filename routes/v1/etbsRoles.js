@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
   var conn = database.getConnection();
 
   if (conn) {
-
     var sql = "SELECT rolename, profileid FROM roles";
 
     conn.query(sql,

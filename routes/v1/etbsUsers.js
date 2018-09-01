@@ -1,9 +1,21 @@
 var express = require('express');
+var database = require('./database');
 var router = express.Router();
 
 /* GET etbs-users listing. */
 router.get('/', function(req, res, next) {
-  res.render('v1/etbsUsers');
+  var conn = database.getConnection();
+
+  if (conn) {
+    var sql = "SELECT username, rolename FROM users";
+
+    conn.query(sql,
+    function (err, result) {
+      res.render('v1/etbsUsers', { users: result });
+
+      conn.end();
+    });
+  }
 });
 
 router.get('/form', function(req, res, next) {
@@ -11,7 +23,24 @@ router.get('/form', function(req, res, next) {
 });
 
 router.post('/insert', function(req, res, next) {
-  res.send('respond etbs-users');
+  var username = req.body.username;
+  var rolename = req.body.rolename;
+
+  var conn = database.getConnection();
+
+  if (conn) {
+
+    var sql = "INSERT INTO users (username, rolename) "
+      + "VALUES ('" + username + "', '" + rolename + "')";
+
+    conn.query(sql,
+    function (err, result) {
+
+      conn.end();
+    });
+
+    res.redirect('/etbs-users');
+  }
 });
 
 router.get('/:id', function(req, res, next) {

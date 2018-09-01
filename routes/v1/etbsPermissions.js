@@ -1,17 +1,47 @@
 var express = require('express');
+var database = require('./database');
 var router = express.Router();
 
 /* GET etbs-users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond etbs-permissions');
+  var conn = database.getConnection();
+
+  if (conn) {
+    var sql = "SELECT permission, profileid, perm_type FROM permissions";
+
+    conn.query(sql,
+    function (err, result) {
+      res.render('v1/etbsPermissions', { permissions: result });
+
+      conn.end();
+    });
+  }
 });
 
 router.get('/form', function(req, res, next) {
-  res.send('respond etbs-permissions');
+  res.render('v1/etbsPermissionsForm');
 });
 
 router.post('/insert', function(req, res, next) {
-  res.send('respond etbs-permissions');
+  var permission = req.body.permission;
+  var profileid = req.body.profileid;
+  var perm_type = req.body.perm_type;
+
+  var conn = database.getConnection();
+
+  if (conn) {
+
+    var sql = "INSERT INTO permissions (permission, profileid, perm_type) "
+      + "VALUES ('" + permission + "', '" + profileid + "', '" + perm_type + "')";
+
+    conn.query(sql,
+    function (err, result) {
+
+      conn.end();
+    });
+
+    res.redirect('/etbs-permissions');
+  }
 });
 
 router.get('/:id', function(req, res, next) {
